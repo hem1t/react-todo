@@ -1,12 +1,11 @@
 import { createContext, useContext, useReducer } from "react"
 import {colors, Repeat, questions}  from "./settings_ds";
 
-interface TodoSettings {
+export interface TodoSettings {
   title_placeholder: string,
   title: string,
   color: string,
   repeat: Repeat,
-  titleTouched: boolean,
   startTime: Date,
   endTime: Date,
   allDay: boolean,
@@ -17,8 +16,7 @@ class defaultTodoSettings implements TodoSettings {
   title_placeholder = "";
   title = "";
   color = colors['lavender'];
-  repeat: Repeat = { type: { name: 'never' } };
-  titleTouched = false;
+  repeat: Repeat = { type: 'never', data: null };
   startTime = new Date();
   endTime = new Date();
   allDay = false;
@@ -33,7 +31,7 @@ class defaultTodoSettings implements TodoSettings {
 }
 
 interface Action {
-  type: 'title' | 'color' | 'repeat' | 'touched title' | 'starttime' | 'endtime' | 'allday' | 'desc',
+  type: 'title' | 'color' | 'repeat' | 'starttime' | 'endtime' | 'allday' | 'desc',
   data: any
 }
 
@@ -48,6 +46,21 @@ function updateSettings(settings: TodoSettings, change: Action) {
         ...settings,
         repeat: change.data
       };
+    case 'starttime':
+      return {
+        ...settings,
+        startTime: change.data,
+      }
+    case 'endtime':
+      return {
+        ...settings,
+        endTime: change.data,
+      }
+    case 'allday':
+      return {
+        ...settings,
+        allDay: change.data
+      }
     default:
       throw Error("not right dispatch on todo add settings");
   }

@@ -1,5 +1,5 @@
-import {  useTodoCreatorContext, useTodoCreatorDispatcherContext } from "./todoContext";
-import { colors } from "./settings_ds";
+import {  useTodoCreatorContext, useTodoCreatorDispatcherContext } from "../../data_components/todoContext";
+import { colors } from "../../data_components/settings_ds";
 
 function getBG(color: string) {
   return {

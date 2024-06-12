@@ -2,7 +2,9 @@ import { Head } from "../../components/Head"
 import { LabelInput } from "./LabelInput";
 import { ColorSelector } from "./ColorSelector";
 import { RepeatSetting } from "./RepeatSetting";
-import { TodoCreatorProvider } from "./todoContext";
+import { TodoCreatorProvider } from "../../data_components/todoContext";
+import { AllDay, CheckBox } from "./AllDay";
+import { TimePrompt } from "./TimePrompt";
 
 
 export const CreateTodo = () => {
@@ -25,6 +27,8 @@ export const CreateTodo = () => {
           <LabelInput />
           <ColorSelector />
           <RepeatSetting />
+          <AllDay />
+          <TimePrompt />
         </div>
       </div>
     </TodoCreatorProvider>

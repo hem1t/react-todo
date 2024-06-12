@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useTodoCreatorContext, useTodoCreatorDispatcherContext } from "../../data_components/todoContext"
 
-interface Time {
-  
-}
-
 export const AskTime = () => {
   let [time, setTime] = useState();
 }

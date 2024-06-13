@@ -1,18 +1,18 @@
 export let colors = {
-  "lavender": "#7986CB",
-  "sage": "#33B679",
-  "grape": "#8E24AA",
-  "flamingo": "#E67C73",
-  "banana": "#F6BF26",
-  "tangerine": "#F4511E",
-  "peacock": "#039BE5",
-  "graphite": "#616161",
-  "blueberry": "#3F51B5",
-  "basil": "#0B8043",
-  "tomato": "#D50000",
-  "cocoa": "#795548",
-  "pumpkin": "#EF6C00"
-}
+  lavender: "#7986CB",
+  sage: "#33B679",
+  grape: "#8E24AA",
+  flamingo: "#E67C73",
+  banana: "#F6BF26",
+  tangerine: "#F4511E",
+  peacock: "#039BE5",
+  graphite: "#616161",
+  blueberry: "#3F51B5",
+  basil: "#0B8043",
+  tomato: "#D50000",
+  cocoa: "#795548",
+  pumpkin: "#EF6C00",
+};
 
 export let questions = [
   "What's up?",
@@ -24,8 +24,8 @@ export let questions = [
   "Go shopping",
   "Make Coffee",
   "Find Recipe",
-  "Art Time"
-]
+  "Art Time",
+];
 
 export enum Day {
   Sunday = 0,
@@ -38,6 +38,6 @@ export enum Day {
 }
 
 export interface Repeat {
-  type: 'never' | 'weekly' | 'monthly' | 'yearly',
-  data: null | Day[] | number[] | [number, number][]
+  type: "never" | "weekly" | "monthly" | "yearly";
+  data: null | Day[] | number[] | [number, number][];
 }

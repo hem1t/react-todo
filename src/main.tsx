@@ -1,12 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import TodoTypeProvider from './data_components/types.tsx'
-import { BrowserRouter } from 'react-router-dom'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+import TodoTypeProvider from "./data_components/types.tsx";
+import { BrowserRouter } from "react-router-dom";
 
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <TodoTypeProvider>
     <BrowserRouter>
       <React.StrictMode>
@@ -14,4 +13,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </React.StrictMode>
     </BrowserRouter>
   </TodoTypeProvider>
-)
+);

@@ -17,7 +17,7 @@ export interface Time {
   minute: number;
 }
 
-class defaultTodoSettings implements TodoSettings {
+export class defaultTodoSettings implements TodoSettings {
   title_placeholder = "";
   title = "";
   color = colors["lavender"];
@@ -31,6 +31,10 @@ class defaultTodoSettings implements TodoSettings {
     let key = Math.floor(Math.random() * questions.length);
     this.title_placeholder = questions[key];
     this.title = questions[key];
+  }
+
+  verifySettings() {
+    return this.title.length > 3;
   }
 }
 

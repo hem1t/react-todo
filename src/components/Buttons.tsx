@@ -10,7 +10,7 @@ export const PositiveButton = ({
       className={
         "flex justify-center items-center flex-1 " +
         "text-white bg-apporange select-none " +
-        "p-1"
+        "p-1 cursor-pointer"
       }
       onClick={onClick}
     >
@@ -31,7 +31,7 @@ export const NegativeButton = ({
       className={
         "flex justify-center items-center flex-1 " +
         "text-apporange bg-white border-2 border-apporange " +
-        "select-none p-1"
+        "select-none p-1 cursor-pointer"
       }
       onClick={onClick}
     >

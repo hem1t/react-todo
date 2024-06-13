@@ -71,7 +71,7 @@ const MonthlyRepeat = () => {
   return (
     <div className="flex justify-between">
       <div className="flex flex-wrap gap-1 px-1 items-center">
-        {settings.repeat.data.map((n:number, i:number) => {
+        {settings.repeat.data.map((n: number, i: number) => {
           return (
             <div
               key={i}
@@ -129,7 +129,7 @@ const MonthlyRepeat = () => {
                   ],
                 },
               });
-            } 
+            }
             setInp(0);
           }}
         >

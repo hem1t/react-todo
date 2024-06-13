@@ -23,6 +23,7 @@ export const LabelInput = () => {
       style={settingStyle}
       onChange={(event) => {
         updateSetting({ type: "title", data: { title: event.target.value } });
+        console.log(setting);
       }}
     />
   );

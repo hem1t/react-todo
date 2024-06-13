@@ -1,15 +1,28 @@
 import { createContext, useContext, useReducer } from "react";
-import { TodoSettings } from "./todoContext";
+import { TodoSettings, defaultTodoSettings } from "./todoContext";
 
 export interface TodoData {
   id: number;
   data: TodoSettings;
 }
 
-let initial: TodoData[] = [];
+let initial: TodoData[] = [
+  {
+    id: 0,
+    data: new defaultTodoSettings(),
+  },
+  {
+    id: 1,
+    data: new defaultTodoSettings(),
+  },
+  {
+    id: 2,
+    data: new defaultTodoSettings(),
+  },
+];
 
 let todoDataContext = createContext(initial);
-let updatetodoDataContext = createContext(() => {});
+let updatetodoDataContext = createContext((_: Action) => {});
 
 export const useTodoDataContext = () => {
   return useContext(todoDataContext);
@@ -24,7 +37,7 @@ interface Action {
   data: TodoData;
 }
 
-function reducer(data: TodoData[], action: Action) {
+function updateTodoData(data: TodoData[], action: Action) {
   switch (action.type) {
     case "add":
       return [...data, action.data];
@@ -42,13 +55,13 @@ function reducer(data: TodoData[], action: Action) {
 }
 
 export const TodoDataContextProvider = ({ children }: { children: any }) => {
-  let [state, dispatch] = useReducer(reducer, initial);
+  let [state, dispatch] = useReducer(updateTodoData, initial);
 
   return (
-    <todoDataContext.Provider value={state}>
-      <updatetodoDataContext.Provider value={dispatch}>
+    <updatetodoDataContext.Provider value={dispatch}>
+      <todoDataContext.Provider value={state}>
         {children}
-      </updatetodoDataContext.Provider>
-    </todoDataContext.Provider>
+      </todoDataContext.Provider>
+    </updatetodoDataContext.Provider>
   );
 };

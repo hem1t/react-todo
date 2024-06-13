@@ -1,8 +1,13 @@
 import { Head } from "../components/Head";
 import AddButton from "../components/AddButton";
 import { Link } from "react-router-dom";
+import { useTodoDataContext } from "../data_components/TodoDataContextProvider";
 
 export const TodoPage = () => {
+  let todoData = useTodoDataContext();
+
+  console.log(todoData);
+
   return (
     <div
       className={
@@ -18,7 +23,11 @@ export const TodoPage = () => {
           "rounded-[15px] pt-11 mt-5 md:border-[3px] lg:border-4"
         }
       >
-        <div className={"flex "}></div>
+        <div className={"flex-1 flex flex-col "}>
+          {todoData.map((todo) => {
+            return <div key={todo.id}>{todo.data.title}</div>;
+          })}
+        </div>
         <Link to="/add_todo">
           <AddButton />
         </Link>

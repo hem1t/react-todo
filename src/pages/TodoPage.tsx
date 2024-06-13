@@ -18,7 +18,7 @@ export const TodoPage = () => {
           "rounded-[15px] pt-11 mt-5 md:border-[3px] lg:border-4"
         }
       >
-        <div className={"flex  "}></div>
+        <div className={"flex "}></div>
         <Link to="/add_todo">
           <AddButton />
         </Link>

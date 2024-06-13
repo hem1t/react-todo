@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   useTodoCreatorContext,
   useTodoCreatorDispatcherContext,
@@ -71,7 +71,7 @@ const MonthlyRepeat = () => {
   return (
     <div className="flex justify-between">
       <div className="flex flex-wrap gap-1 px-1 items-center">
-        {settings.repeat.data.map((n, i) => {
+        {settings.repeat.data.map((n:number, i:number) => {
           return (
             <div
               key={i}

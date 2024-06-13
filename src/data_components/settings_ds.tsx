@@ -39,5 +39,5 @@ export enum Day {
 
 export interface Repeat {
   type: "never" | "weekly" | "monthly" | "yearly";
-  data: null | Day[] | number[] | [number, number][];
+  data: any;
 }

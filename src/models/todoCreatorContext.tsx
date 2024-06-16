@@ -39,9 +39,9 @@ interface Action {
 function updateSettings(settings: Todo, change: Action) {
   switch (change.type) {
     case "title":
-      return { ...settings, title: change.data.title };
+      return { ...settings, title: change.data };
     case "color":
-      return { ...settings, color: change.data.color };
+      return { ...settings, color: change.data };
     case "repeat":
       return {
         ...settings,

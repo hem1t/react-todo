@@ -1,5 +1,5 @@
 import { Head } from "./components/Head";
-import { LabelInput } from "./creator_components/LabelInput";
+import { TaskNameInput } from "./creator_components/LabelInput";
 import { ColorSelector } from "./creator_components/ColorSelector";
 import { RepeatSetting } from "./creator_components/RepeatSetting";
 import { AllDay } from "./creator_components/AllDay";
@@ -26,14 +26,14 @@ export const CreateTodo = () => {
       >
         <div className="flex flex-col justify-start gap-11 px-4 pb-11 pt-2">
           <div className="flex flex-col gap-2">
-            <LabelInput />
+            <TaskNameInput />
             <ColorSelector />
             <Description />
           </div>
-          <RepeatSetting />
+          {/* <RepeatSetting /> */}
           <div className="flex flex-col items-center px-8 gap-2">
-            <AllDay />
-            <TimePrompt />
+            {/* <AllDay /> */}
+            {/* <TimePrompt /> */}
           </div>
         </div>
         <div className="flex ml-[-2px] mb-[-2px]">

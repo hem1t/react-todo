@@ -4,13 +4,16 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { TodoBufferProvider } from "./models/todoBufferContext.tsx";
+import { TodoCreatorProvider } from "./models/todoCreatorContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <TodoBufferProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </TodoBufferProvider>
+    <TodoCreatorProvider>
+      <TodoBufferProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </TodoBufferProvider>
+    </TodoCreatorProvider>
   </React.StrictMode>
 );

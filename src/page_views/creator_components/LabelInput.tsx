@@ -1,9 +1,9 @@
 import {
   useTodoCreatorContext,
   useTodoCreatorDispatcherContext,
-} from "../../data_components/todoContext";
+} from "../../models/todoCreatorContext";
 
-export const LabelInput = () => {
+export const TaskNameInput = () => {
   let setting = useTodoCreatorContext();
   let updateSetting = useTodoCreatorDispatcherContext();
 
@@ -22,8 +22,7 @@ export const LabelInput = () => {
       }
       style={settingStyle}
       onChange={(event) => {
-        updateSetting({ type: "title", data: { title: event.target.value } });
-        console.log(setting);
+        updateSetting({ type: "title", data: event.target.value });
       }}
     />
   );

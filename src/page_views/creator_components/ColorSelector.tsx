@@ -1,8 +1,8 @@
+import Color from "../../data/colors";
 import {
   useTodoCreatorContext,
   useTodoCreatorDispatcherContext,
-} from "../../data_components/todoContext";
-import { colors } from "../../data_components/settings_ds";
+} from "../../models/todoCreatorContext";
 
 function getBG(color: string) {
   return {
@@ -16,7 +16,7 @@ export const ColorSelector = () => {
 
   return (
     <div className="flex flex-wrap gap-1.5 m-1 justify-center">
-      {Object.entries(colors).map(([name, color]) => {
+      {Object.entries(Color).map(([name, color]) => {
         return (
           <div
             className={
@@ -26,7 +26,8 @@ export const ColorSelector = () => {
                 : "")
             }
             onClick={() => {
-              settingsDispatch({ type: "color", data: { color: color } });
+              console.log(name, color, setting.color);
+              settingsDispatch({ type: "color", data: color });
             }}
             style={getBG(color)}
             key={name}

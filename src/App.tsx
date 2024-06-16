@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { TodoPage } from "./pages/TodoPage";
-import { CreateTodo } from "./pages/todo_creator/CreateTodo";
+import { TodoPage } from "./page_views/TodoPage";
+import { CreateTodo } from "./page_views/todo_creator/CreateTodo";
 
 const App = () => {
   return (

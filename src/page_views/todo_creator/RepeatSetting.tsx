@@ -145,8 +145,8 @@ const YearlyRepeat = () => {
 };
 
 const stringToDiv = (s: string) => {
-  return s.split("").map((c) => {
-    return <p className="w-full">{c}</p>;
+  return s.split("").map((c, i) => {
+    return <p key={i} className="w-full">{c}</p>;
   });
 };
 

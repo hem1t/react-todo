@@ -1,12 +1,15 @@
-import { Head } from "../components/Head";
-import AddButton from "../components/AddButton";
+import { Head } from "./view_components/Head";
+import AddButton from "./view_components/AddButton";
 import { Link } from "react-router-dom";
 import { useTodoDataContext } from "../data_components/TodoDataContextProvider";
+import { useEffect } from "react";
 
 export const TodoPage = () => {
   let todoData = useTodoDataContext();
 
-  console.log(todoData);
+  useEffect(() => {
+    console.log(todoData);
+  }, todoData);
 
   return (
     <div

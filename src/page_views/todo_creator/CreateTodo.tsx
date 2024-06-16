@@ -1,4 +1,4 @@
-import { Head } from "../../components/Head";
+import { Head } from "../view_components/Head";
 import { LabelInput } from "./LabelInput";
 import { ColorSelector } from "./ColorSelector";
 import { RepeatSetting } from "./RepeatSetting";
@@ -9,7 +9,7 @@ import {
 import { AllDay } from "./AllDay";
 import { TimePrompt } from "./TimePrompt";
 import { Description } from "./Description";
-import { NegativeButton, PositiveButton } from "../../components/Buttons";
+import { NegativeButton, PositiveButton } from "../view_components/Buttons";
 import { Link } from "react-router-dom";
 import {
   useTodoDataContext,
@@ -54,8 +54,6 @@ export const CreateTodo = () => {
           <PositiveButton
             text="Add"
             onClick={() => {
-              console.log("adding", settings);
-              console.log(todoData.length);
               updateTodoData({
                 type: "add",
                 data: {
@@ -63,7 +61,6 @@ export const CreateTodo = () => {
                   data: { ...settings },
                 },
               });
-              console.log(todoData);
             }}
           />
         </div>

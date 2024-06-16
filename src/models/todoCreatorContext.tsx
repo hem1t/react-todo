@@ -1,26 +1,31 @@
 import { createContext, useContext, useReducer } from "react";
-import { colors, Repeat, questions } from "./settings_ds";
+import Color from "../data/colors";
+import labels from "../data/todo_labels";
 
-export interface TodoSettings {
-  title_placeholder: string;
-  title: string;
-  color: string;
-  repeat: Repeat;
-  startTime: Time;
-  endTime: Time;
-  allDay: boolean;
-  description: string;
+enum Day {
+  Sunday = 0,
+  Monday = 1,
+  Tuesday = 2,
+  Wednesday = 3,
+  Thursday = 4,
+  Friday = 5,
+  Saturday = 6,
 }
 
-export interface Time {
+interface Repeat {
+  type: "never" | "weekly" | "monthly" | "yearly";
+  data: any;
+}
+
+interface Time {
   hour: number;
   minute: number;
 }
 
-export class defaultTodoSettings implements TodoSettings {
+class Todo {
   title_placeholder = "";
   title = "";
-  color = colors["lavender"];
+  color = Color.LAVENDER;
   repeat: Repeat = { type: "never", data: null };
   startTime = { hour: 0, minute: 0 };
   endTime = { hour: 0, minute: 0 };
@@ -28,13 +33,9 @@ export class defaultTodoSettings implements TodoSettings {
   description = "";
 
   constructor() {
-    let key = Math.floor(Math.random() * questions.length);
-    this.title_placeholder = questions[key];
-    this.title = questions[key];
-  }
-
-  verifySettings() {
-    return this.title.length > 3;
+    let key = Math.floor(Math.random() * labels.length);
+    this.title_placeholder = labels[key];
+    this.title = labels[key];
   }
 }
 
@@ -50,7 +51,7 @@ interface Action {
   data: any;
 }
 
-function updateSettings(settings: TodoSettings, change: Action) {
+function updateSettings(settings: Todo, change: Action) {
   switch (change.type) {
     case "title":
       return { ...settings, title: change.data.title };
@@ -81,7 +82,7 @@ function updateSettings(settings: TodoSettings, change: Action) {
   }
 }
 
-let todoCreatorContext = createContext(new defaultTodoSettings());
+let todoCreatorContext = createContext(new Todo());
 let todoCreatorDispatcherContext = createContext((_: Action) => {});
 
 export const useTodoCreatorContext = () => useContext(todoCreatorContext);
@@ -91,7 +92,7 @@ export const useTodoCreatorDispatcherContext = () =>
 export function TodoCreatorProvider({ children }: { children: any }) {
   let [creatorSetting, updateCreatorSetting] = useReducer(
     updateSettings,
-    new defaultTodoSettings()
+    new Todo()
   );
 
   return (

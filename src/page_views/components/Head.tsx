@@ -1,13 +1,8 @@
-import { useTodoType, useUpdateTodoType } from "../data_components/types";
-
 interface Prop {
   text: string;
 }
 
 export const Head = ({ text }: Prop) => {
-  let todoType = useTodoType();
-  let updateTodoType = useUpdateTodoType();
-
   return (
     <div
       className={
@@ -24,9 +19,10 @@ export const Head = ({ text }: Prop) => {
             "md:text-[32px] md:py-[13px] md:px-4 " +
             "lg:text-[32px] lg:py-[13px] lg:px-4"
           }
-          onClick={updateTodoType}
+          // onClick={updateTodoType}
         >
-          {todoType}
+          {/* {todoType} */}
+          Today
         </div>
         <div
           className={

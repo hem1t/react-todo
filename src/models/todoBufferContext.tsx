@@ -28,6 +28,7 @@ export enum RepeatType {
   Weekly,
   Monthly,
   Yearly,
+  Never,
 }
 
 export interface TodoTaskElement {
@@ -37,10 +38,10 @@ export interface TodoTaskElement {
   isAllDay:
     | true
     | {
-        starttime: Date;
-        endtime: Date;
+        starttime: [number, number];
+        endtime: [number, number];
       };
-  repeat: {
+  repeat: RepeatType.Never | {
     type: RepeatType;
     days:
       | Boolean[] // Represeting 7 Days on every boolean
@@ -53,22 +54,28 @@ function bufferDispatchRunner(
   current: Array<TodoTaskElement>,
   action: BufferAction
 ) {
-    switch (action.type) {
-        case BufferActionType.Push:
-            return [...current, action.task];
-        case BufferActionType.Remove:
-            return current.filter((_, i) => {
-                return i !== action.index;
-            });
-        case BufferActionType.Update:
-            return current.map((task, i) => {
-                if (i === action.index) {
-                    return action.task;
-                }
-                return task
-            });
-    }
+  switch (action.type) {
+    case BufferActionType.Push:
+      return [...current, action.task];
+    case BufferActionType.Remove:
+      return current.filter((_, i) => {
+        return i !== action.index;
+      });
+    case BufferActionType.Update:
+      return current.map((task, i) => {
+        if (i === action.index) {
+          return action.task;
+        }
+        return task;
+      });
+  }
 }
+
+let sample_lists = [
+  { task_name: "Task 1", color: Color.BANANA },
+  { task_name: "Task 2", color: Color.BASIL },
+  { task_name: "Task 3", color: Color.GRAPE }
+];
 
 export function TodoBufferProvider({ children }: any) {
   let [state, dispatch] = useReducer(

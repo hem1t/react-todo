@@ -1,14 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import { TodoPage } from "./page_views/TodoPage";
-import { CreateTodo } from "./page_views/todo_creator/CreateTodo";
+import { MainPage } from "./page_views/MainPage";
 
 const App = () => {
   return (
     <>
       <div className="flex flex-col items-center h-full">
         <Routes>
-          <Route path="/" element={<TodoPage />} />
-          <Route path="/add_todo" element={<CreateTodo />} />
+          <Route path="/" element={<MainPage />} />
+          {/* <Route path="/add_todo" element={<CreateTodo />} /> */}
         </Routes>
       </div>
     </>

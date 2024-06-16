@@ -2,24 +2,9 @@ import { createContext, useContext, useReducer } from "react";
 import Color from "../data/colors";
 import labels from "../data/todo_labels";
 
-enum Day {
-  Sunday = 0,
-  Monday = 1,
-  Tuesday = 2,
-  Wednesday = 3,
-  Thursday = 4,
-  Friday = 5,
-  Saturday = 6,
-}
-
 interface Repeat {
   type: "never" | "weekly" | "monthly" | "yearly";
   data: any;
-}
-
-interface Time {
-  hour: number;
-  minute: number;
 }
 
 class Todo {

@@ -198,15 +198,16 @@ const YearlyRepeat = () => {
         {setting.repeat.data.map(([d, m], i) => {
           return <YearlyElement key={i} i={i} date={d} month={m} 
             removeMethod={() => {
-              updateSetting({
+              setting.repeat.data.splice(i, 1);
+              let dispatchData = {
                 type: "repeat",
                 data: {
                   type: "yearly",
-                  data: setting.repeat.data.filter((_, index) => {
-                    index !== i
-                  })
+                  data: setting.repeat.data
                 }
-              });
+              };
+              console.log(dispatchData);
+              updateSetting(dispatchData);
             }}
            />;
         })}

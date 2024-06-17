@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { BufferAction, BufferActionType, RepeatType, TodoTaskElement, useTodoBufferWriterContext } from "../../models/todoBufferContext";
 import { useTodoCreatorContext } from "../../models/todoCreatorContext";
 import { PositiveButton } from "../components/Buttons";
@@ -11,6 +12,7 @@ let repeat_type = {
 export const TodoAddButton = () => {
   let creatorTodo = useTodoCreatorContext();
   let todo_buffer = useTodoBufferWriterContext();
+  let navigate = useNavigate();
 
   return <PositiveButton text="Done" onClick={() => {
     let task: TodoTaskElement = {
@@ -35,5 +37,6 @@ export const TodoAddButton = () => {
         index: 0
     }
     todo_buffer(todoAction);
+    navigate("/");
   }}></PositiveButton>;
 };

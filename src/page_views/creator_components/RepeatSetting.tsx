@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   useTodoCreatorContext,
   useTodoCreatorDispatcherContext,
-} from "../../data_components/todoContext";
+} from "../../models/todoCreatorContext";
 
 let repeatLabels = ["never", "weekly", "monthly", "yearly"];
 
@@ -15,7 +15,11 @@ const repeatDefaults = (type: string) => {
     case "monthly":
       return [5, 1, 2];
     case "yearly":
-      return [[1, 1]];
+      return [
+        [1, 1],
+        [5, 12],
+        [31, 12],
+      ];
   }
 };
 
@@ -62,6 +66,40 @@ const WeeklyRepeat = () => {
   );
 };
 
+const MonthElement = ({ n, i }: any) => {
+  let settings = useTodoCreatorContext();
+  let dispatchSettings = useTodoCreatorDispatcherContext();
+
+  return (
+    <div
+      key={i}
+      className={
+        "flex justify-center items-center cursor-pointer " +
+        "text-[11px] size-4 text-center focus:outline-1 focus:outline-gray-500 " +
+        "bg-apporange rounded-full text-white select-none "
+      }
+      onClick={() => {
+        settings.repeat.data?.splice(i, 1);
+        dispatchSettings({
+          type: "repeat",
+          data: {
+            type: "monthly",
+            data: settings.repeat.data,
+          },
+        });
+      }}
+      onMouseEnter={(event) => {
+        event.currentTarget.innerText = "-";
+      }}
+      onMouseLeave={(event) => {
+        event.currentTarget.innerText = String(n);
+      }}
+    >
+      {String(n)}
+    </div>
+  );
+};
+
 const MonthlyRepeat = () => {
   let settings = useTodoCreatorContext();
   let dispatchSettings = useTodoCreatorDispatcherContext();
@@ -72,34 +110,7 @@ const MonthlyRepeat = () => {
     <div className="flex justify-between">
       <div className="flex flex-wrap gap-1 px-1 items-center">
         {settings.repeat.data.map((n: number, i: number) => {
-          return (
-            <div
-              key={i}
-              className={
-                "flex justify-center items-center cursor-pointer " +
-                "text-[11px] size-4 text-center focus:outline-1 focus:outline-gray-500 " +
-                "bg-apporange rounded-full text-white select-none "
-              }
-              onClick={() => {
-                settings.repeat.data?.splice(i, 1);
-                dispatchSettings({
-                  type: "repeat",
-                  data: {
-                    type: "monthly",
-                    data: settings.repeat.data,
-                  },
-                });
-              }}
-              onMouseEnter={(event) => {
-                event.currentTarget.innerText = "-";
-              }}
-              onMouseLeave={(event) => {
-                event.currentTarget.innerText = String(n);
-              }}
-            >
-              {String(n)}
-            </div>
-          );
+          return <MonthElement n={n} i={i} />;
         })}
       </div>
       <div className="flex flex-col">
@@ -140,13 +151,113 @@ const MonthlyRepeat = () => {
   );
 };
 
+const YearlyElement = ({
+  date,
+  month,
+  i,
+  removeMethod
+}: {
+  date: number;
+  month: number;
+  i: number;
+  removeMethod: () => {}
+}) => {
+  return (
+    <div
+      key={i}
+      className={
+        "flex justify-center items-center cursor-pointer " +
+        "text-[11px] text-center focus:outline-1 focus:outline-gray-500 " +
+        "bg-apporange rounded-lg text-white select-none " +
+        "h-5 w-8 p-[2px]"
+      }
+      onMouseEnter={(event) => {
+        event.currentTarget.innerText = "-";
+      }}
+      onMouseLeave={(event) => {
+        event.currentTarget.innerText = String(
+          String(date) + "/" + String(month)
+        );
+      }}
+      onClick={removeMethod}
+    >
+      {date}/{month}
+    </div>
+  );
+};
+
 const YearlyRepeat = () => {
-  return <div>Not implemented!</div>;
+  let setting = useTodoCreatorContext();
+  let updateSetting = useTodoCreatorDispatcherContext();
+  let [date, setDate] = useState(0);
+  let [month, setMonth] = useState(0);
+
+  return (
+    <div className="flex justify-center m-1">
+      <div className="flex-1 flex gap-1 px-2 items-center flex-wrap">
+        {setting.repeat.data.map(([d, m], i) => {
+          return <YearlyElement key={i} i={i} date={d} month={m} 
+            removeMethod={() => {
+              updateSetting({
+                type: "repeat",
+                data: {
+                  type: "yearly",
+                  data: setting.repeat.data.filter((_, index) => {
+                    index !== i
+                  })
+                }
+              });
+            }}
+           />;
+        })}
+      </div>
+      <div className="flex flex-col gap-[1px]">
+        <div className="flex gap-[2px]">
+          <input
+            className="size-5 text-center rounded-[7px] border border-gray-400"
+            onChange={(event) => {
+              let val = Number(event.target.value)
+              setDate(Math.max(Math.min(val, 31), 1));
+            }}
+            value={date}
+          />
+          <input
+            className="size-5 text-center rounded-[7px] border border-gray-400"
+            onChange={(event) => {
+              let val = Number(event.target.value);
+              setMonth(Math.max(Math.min(val, 12), 1));
+            }}
+            value={month}
+          />
+        </div>
+        <button
+          className="bg-apporange text-white rounded-[8px] font-bold"
+          onClick={() => {
+            if (setting.repeat.data.length !== 10) {
+              updateSetting({
+                type: "repeat",
+                data: {
+                  type: "yearly",
+                  data: [...setting.repeat.data, [date, month]],
+                },
+              });
+            }
+          }}
+        >
+          +
+        </button>
+      </div>
+    </div>
+  );
 };
 
 const stringToDiv = (s: string) => {
   return s.split("").map((c, i) => {
-    return <p key={i} className="w-full">{c}</p>;
+    return (
+      <p key={i} className="w-full">
+        {c}
+      </p>
+    );
   });
 };
 

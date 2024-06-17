@@ -30,7 +30,7 @@ export const CreateTodo = () => {
             <ColorSelector />
             <Description />
           </div>
-          {/* <RepeatSetting /> */}
+          <RepeatSetting />
           <div className="flex flex-col items-center px-8 gap-2">
             {/* <AllDay /> */}
             {/* <TimePrompt /> */}

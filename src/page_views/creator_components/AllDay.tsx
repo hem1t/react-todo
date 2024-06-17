@@ -1,4 +1,4 @@
-import { useTodoCreatorContext, useTodoCreatorDispatcherContext } from "../../data_components/todoContext";
+import { useTodoCreatorContext, useTodoCreatorDispatcherContext } from "../../models/todoCreatorContext";
 
 export const CheckBox = () => {
     let settings = useTodoCreatorContext();

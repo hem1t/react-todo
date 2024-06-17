@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-  useTodoCreatorContext,
-  useTodoCreatorDispatcherContext,
-} from "../../data_components/todoContext";
+import { useTodoCreatorContext, useTodoCreatorDispatcherContext } from "../../models/todoCreatorContext";
 
 export const AskTime = ({
   onChange,
@@ -12,19 +9,23 @@ export const AskTime = ({
   let [minute, setMinute] = useState(0);
   let [hour, setHour] = useState(0);
 
+  let settings = useTodoCreatorContext();
+  let disabled = settings.allDay;
+
   return (
     <div className="flex items-center gap-0.5">
       <input
         type="text"
         className={
           "shadow shadow-inner w-8 border-2 rounded-md " +
-          "text-center select-none"
+          "text-center select-none "
         }
         onChange={(event) => {
           setHour(Math.min(Math.max(parseInt(event.target.value), 0), 24));
           onChange(hour, minute);
         }}
         value={String(hour).padStart(2, "0")}
+        disabled={disabled}
       ></input>
       <span className="flex justify-center items-center">:</span>
       <input
@@ -38,14 +39,15 @@ export const AskTime = ({
           onChange(hour, minute);
         }}
         value={String(minute).padStart(2, "0")}
+        disabled={disabled}
       ></input>
     </div>
   );
 };
 
 export const TimePrompt = () => {
-  let settings = useTodoCreatorContext();
   let settingsDispatch = useTodoCreatorDispatcherContext();
+
 
   return (
     <div className="flex justify-between gap-5">

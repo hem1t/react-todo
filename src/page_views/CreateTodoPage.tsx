@@ -32,8 +32,8 @@ export const CreateTodo = () => {
           </div>
           <RepeatSetting />
           <div className="flex flex-col items-center px-8 gap-2">
-            {/* <AllDay /> */}
-            {/* <TimePrompt /> */}
+            <AllDay />
+            <TimePrompt />
           </div>
         </div>
         <div className="flex ml-[-2px] mb-[-2px]">
